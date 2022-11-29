@@ -113,17 +113,25 @@ void winPointSideAuton() {
   move(30, 200, -100);
   move(-30, 200);
   // move towards the center of the field
-  turn(-30, 650);
-  move(30, 1500);
-  // align to the highgoal
-  turn(30, 950);
-  move(30, 200);
+  turn(-30, 200);
+  move(-40, 1900);
+  // align to high goal
+  turn(30, 410);
+  move(-30, 270);
+  task::sleep(500);
   catapultShoot();
-  spin(catapult);
+  lowerCatapult();
 }
 
 void sideAuton() {
 
+}
+
+void preventError() {
+  chassis_left.stop();
+  chassis_right.stop();
+  intake_roller.stop();
+  catapult.stop();
 }
 
 void auton_ctrl() {
@@ -134,6 +142,7 @@ void auton_ctrl() {
     case 0: skill(); break;
     case 1: bottomAuton(); break;
     case 2: sideAuton(); break;
-    case 3: winPointSideAuton();
+    case 3: winPointSideAuton(); break;
+    default: preventError();
   }
 }

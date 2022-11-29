@@ -64,9 +64,7 @@ void bumper_based_catapult_ctrl() {
 
 void catapult_manual(){
   if (ctrl.ButtonA.pressing() || catapult_activated) spin(catapult);
-  else {
-    catapult.stop();
-  }
+  else catapult.stop();
 }
 
 void intake_roller_ctrl() {
@@ -94,9 +92,7 @@ void skillRoller() {
     intake_roller.resetRotation();
     toggleRoller = true;
   }
-  else if (std::abs(intake_roller.rotation(rotationUnits::raw)) < 300 && toggleRoller) {
-   spin(intake_roller, 100);
-  }
+  else if (std::abs(intake_roller.rotation(rotationUnits::raw)) < 300 && toggleRoller) spin(intake_roller, 100);
   else if (!ctrl.ButtonR2.pressing() && !ctrl.ButtonL2.pressing()){
     toggleRoller = false;
     intake_roller.stop();
@@ -111,12 +107,12 @@ void split_arcade_ctrl() {
 }
 
 void rope_shooting_stuff() {
-  if(ctrl.ButtonB.pressing()) string_mech.open();
+  if (ctrl.ButtonB.pressing()) string_mech.open();
   else string_mech.close();
 }
 
 void user_ctrl() {
-  while(true) {
+  while (true) {
     reverse_driver_ctrl();
     bumper_based_catapult_ctrl();
     catapult_manual();
