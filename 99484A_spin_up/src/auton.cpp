@@ -1,5 +1,3 @@
-#include <iostream>
-#include <vector>
 #include "vex.h"
 #include <cmath>
 
@@ -123,7 +121,7 @@ void winPointSideAuton() {
   catapultShoot();
   spin(catapult);
 }
-//test
+
 void sideAuton() {
 
 }
