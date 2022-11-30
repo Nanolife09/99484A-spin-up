@@ -1,6 +1,5 @@
 #include "vex.h"
 #include <cmath>
-#include <iostream>
 #include <chrono>
 
 /* CONTROLS

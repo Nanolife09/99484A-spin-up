@@ -135,9 +135,6 @@ void preventError() {
 }
 
 void auton_ctrl() {
-  chassis_left.resetRotation();
-  chassis_right.resetRotation();
-  intake_roller.resetRotation();
   switch (auton_counter) {
     case 0: skill(); break;
     case 1: bottomAuton(); break;

@@ -1,5 +1,4 @@
 #include "vex.h"
-#include <cstdio>
 #include "user_control.h"
 #include "auton.h"
 
