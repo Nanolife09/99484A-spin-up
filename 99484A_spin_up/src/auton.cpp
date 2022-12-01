@@ -117,10 +117,23 @@ void winPointSideAuton() {
   move(-40, 1900);
   // align to high goal
   turn(30, 410);
-  move(-30, 270);
+  move(-30, 300);
   task::sleep(500);
   catapultShoot();
+  // align to the wall
+  move(30, 200);
+  turn(30, 410);
   lowerCatapult();
+  // hit the wall
+  move(50, 800, 100); 
+  turn(30, 450, 100);
+  task::sleep(100); 
+  move(30, 1500, 100);
+  task::sleep(100);  
+  turn(-30, 400, 100);
+  task::sleep(100); 
+  move(30, 500, 100); 
+  move(-30, 200);
 }
 
 void sideAuton() {
