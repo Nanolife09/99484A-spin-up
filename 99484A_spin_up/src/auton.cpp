@@ -2,6 +2,7 @@
 #include <cmath>
 
 int auton_counter = 3;
+bool battery_limit = (Brain.Battery.current() > 0.7) ? true : false; 
 
 template <typename MOTOR>
 
@@ -61,6 +62,7 @@ void skill() {
 }
 
 void bottomAuton() {
+  if (!battery_limit) return;
   lowerCatapult();
   // roller
   move(30, 200, -100);
@@ -125,15 +127,17 @@ void winPointSideAuton() {
   turn(30, 410);
   lowerCatapult();
   // hit the wall
-  move(50, 800, 100); 
-  turn(30, 450, 100);
+  move(50, 1000, 100);
   task::sleep(100); 
-  move(30, 1500, 100);
+  turn(30, 460, 100);
+  task::sleep(100); 
+  move(30, 1400, 100);
   task::sleep(100);  
-  turn(-30, 400, 100);
+  turn(-30, 430, 100);
   task::sleep(100); 
-  move(30, 500, 100); 
-  move(-30, 200);
+  move(20, 700, 100); 
+  spinRoller(100, 500);
+  move(-30, 200, 100);
 }
 
 void sideAuton() {
