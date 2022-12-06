@@ -1,9 +1,6 @@
 #include "vex.h"
 #include <cmath>
 
-int auton_counter = 3;
-bool battery_limit = (Brain.Battery.current() > 0.7) ? true : false; 
-
 template <typename MOTOR>
 
 void spin (MOTOR name, int power = 100) {
@@ -47,6 +44,7 @@ void turn(int power, int time, int roller_power = 0) {
 void catapultShoot() {
   catapult.resetRotation();
   do {
+    catapult.setBrake(brakeType::undefined);
     spin(catapult);
   } while (catapult.rotation(rotationUnits::deg) < 100 || !catapult_limit.pressing());
   catapult.stop();
@@ -62,11 +60,10 @@ void skill() {
 }
 
 void bottomAuton() {
-  if (!battery_limit) return;
   lowerCatapult();
   // roller
   move(30, 200, -100);
-  move(-30, 200);
+  move(-30, 150);
   // align to a disk
   turn(30, 650);
   // intake disk
@@ -81,7 +78,7 @@ void bottomAuton() {
   turn(-30, 100);
   // shoot disk
   catapultShoot();
-  spin(catapult);
+  spin(catapult, 90);
   // align for match load
   move(-30, 1100);
   task::sleep(100);
@@ -110,34 +107,34 @@ void bottomAuton() {
 }
 
 void winPointSideAuton() {
-  lowerCatapult();
   // roller
   move(30, 200, -100);
-  move(-30, 200);
+  move(-30, 150);
   // move towards the center of the field
   turn(-30, 200);
   move(-40, 1900);
   // align to high goal
-  turn(30, 410);
-  move(-30, 300);
+  turn(30, 415);
+  move(-30, 340);
   task::sleep(500);
   catapultShoot();
   // align to the wall
-  move(30, 200);
-  turn(30, 410);
+  move(30, 150);
+  turn(-30, 570);
   lowerCatapult();
   // hit the wall
-  move(50, 1000, 100);
+  move(-50, 1000, 100);
   task::sleep(100); 
-  turn(30, 460, 100);
+  turn(-30, 530, 100);
   task::sleep(100); 
   move(30, 1400, 100);
   task::sleep(100);  
-  turn(-30, 430, 100);
+  turn(-30, 420, 100);
   task::sleep(100); 
-  move(20, 700, 100); 
-  spinRoller(100, 500);
-  move(-30, 200, 100);
+  move(30, 800, -100);
+  task::sleep(100);
+  move(-30, 300, -100);
+  task::sleep(100);
 }
 
 void sideAuton() {
@@ -150,6 +147,8 @@ void preventError() {
   intake_roller.stop();
   catapult.stop();
 }
+
+int auton_counter = 3;
 
 void auton_ctrl() {
   switch (auton_counter) {
